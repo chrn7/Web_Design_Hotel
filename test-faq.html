@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test FAQ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+        
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            width: 100%;
+            background: #f5f5f5;
+            border: none;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #121212;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #C6A664;
+            color: white;
+        }
+        
+        .faq-question span {
+            flex: 1;
+            padding-right: 1rem;
+        }
+        
+        .faq-icon {
+            color: #1A237E;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question:hover .faq-icon {
+            color: white;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            background: white;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 1.5rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        .faq-answer p {
+            color: #121212;
+            line-height: 1.8;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; margin-bottom: 2rem;">Test FAQ Acordeón</h1>
+    
+    <div class="faq-accordion">
+        <div class="faq-item">
+            <button type="button" class="faq-question">
+                <span>¿Se puede reservar con anticipación?</span>
+                <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>No trabajamos con sistema de reservas. Funcionamos por orden de llegada las 24 horas del día.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question">
+                <span>¿Cuáles son las formas de pago?</span>
+                <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Aceptamos efectivo, tarjetas de débito y crédito, y Mercado Pago.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question">
+                <span>¿Cuánto dura un turno?</span>
+                <i class="fas fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Los turnos tienen una duración de 3 horas en Suite Standard y Premium.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('Script cargado');
+        
+        window.addEventListener('load', function() {
+            console.log('DOM cargado');
+            
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            console.log('Preguntas encontradas:', faqQuestions.length);
+            
+            faqQuestions.forEach(function(question, index) {
+                console.log('Agregando listener a pregunta', index + 1);
+                
+                question.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Click en pregunta', index + 1);
+                    
+                    const faqItem = this.parentElement;
+                    const isActive = faqItem.classList.contains('active');
+                    
+                    // Cerrar todas las preguntas
+                    document.querySelectorAll('.faq-item').forEach(function(item) {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Si no estaba activa, abrirla
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                        console.log('Abriendo pregunta', index + 1);
+                    } else {
+                        console.log('Cerrando pregunta', index + 1);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

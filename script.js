@@ -423,3 +423,30 @@ window.addEventListener('load', () => {
         qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(currentURL)}`;
     }
 });
+
+// ========================================
+// FAQ ACCORDION
+// ========================================
+// Esperar a que el DOM esté listo
+window.addEventListener('load', function() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(function(question) {
+        question.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const faqItem = this.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Cerrar todas las preguntas
+            document.querySelectorAll('.faq-item').forEach(function(item) {
+                item.classList.remove('active');
+            });
+            
+            // Si no estaba activa, abrirla
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        });
+    });
+});
